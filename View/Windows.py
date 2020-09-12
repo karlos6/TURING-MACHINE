@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter as tk
+from Control.Controller import Controller
 
 class Windows:     
 # Constructor de la ventana   
@@ -9,7 +10,7 @@ class Windows:
     # Metodo que crea una ventana e inserta un panel de trabajo
     def ventana(self):
         self.view = Tk()     
-        self.diseño()
+        self.diseño()        
         self.labelAndInput()
         self.botones()
         self.view.mainloop()
@@ -28,4 +29,9 @@ class Windows:
 
     # Botones  
     def botones(self):
-        boton1 = Button(self.panel, text="ACEPTAR", width=20,height=2, background="SkyBlue2").place(x=180,y=150)
+        boton1 = Button(self.panel, text="ACEPTAR", width=20,height=2, background="SkyBlue2",
+                        command= self.Accionar).place(x=180,y=150)
+        
+    def Accionar(self):
+        programa = 'A00B00C00T00Z'+self.variable_1.get()
+        self.control = Controller(programa)
