@@ -2,6 +2,7 @@
 import tkinter.messagebox
 from Automatas.AsignarValor import AsignarValor
 from Automatas.BuscarZeta import BuscarZeta
+from Automatas.DesplazarIzqDra import DesplazarIzqDra
 
 
 
@@ -12,7 +13,6 @@ class Control:
         self. automata = []
         self.cont = 0
         self.cabezal = 0        
-        #AsignarValor1 = AsignarValor()
         self.accionar()
         
         
@@ -22,7 +22,11 @@ class Control:
         self.automataBuscarZ = BuscarZeta(self.programa)
         self.cabezal = self.automataBuscarZ.cabezal
         self.codigosInstruccion()
-        
+        print('--------------------------------------------------------------')
+        print('Buscar Zeta')
+        print(self.automataBuscarZ.automata)
+        print('--------------------------------------------------------------')
+#-------SACA LOS CODIGOS PARA EJECUTAR LA ACCION DEL PROGRAMA-----------------
     def codigosInstruccion(self):
         codigo = ''
         contador = 0
@@ -37,24 +41,26 @@ class Control:
             #---------------Fin movimiento en cinta metrica--------------------            
             codigo = codigo + self.programa[self.cabezal]  
             contador = contador + 1
-        self.switch(codigo)        
-        
-        
+        self.switch(codigo)    
 
         
     def switch(self, op):
             if op == '000': self.asignarValor(op)
             elif op == '001': self.asignarVariables()
-            elif op == '010': self.desplazar()
+            elif op == '010': self.desplazar(op)
             elif op == '011': self.sumar()
             elif op == '100': self.restar()
             elif op == '101': self.inicioRepetir()
             elif op == '110': self.finRepetir()
             elif op == '111': self.finPrograma()
             else: print('esta jodido')
+            
         
     def asignarValor(self,op):
         self.automataAsignarValor = AsignarValor(self.programa,op,self.cabezal)
+        
+    def desplazar(self, op):
+        self.automataDesplazar = DesplazarIzqDra(self.programa,op,self.cabezal)
         
         
         

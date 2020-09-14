@@ -43,7 +43,7 @@ class MoverIzquierdaV:
                 self.programa[self.cabezal] = 'Y'
                 #---------------Fin movimiento en cinta metrica---------------                
                 #posible error armado de automata****************************
-                self.automata.append([self.ascii+str(self.cont-1),'0,Y,L',self.ascii+str(self.cont)])   
+                self.automata.append([self.ascii+str(self.cont-1),'1,Y,L',self.ascii+str(self.cont)])   
                 self.BuscarVariable('Y',conta)
                 self.moverDerecha('Y')    
                 self.variable = 'Y'
@@ -98,7 +98,8 @@ class MoverIzquierdaV:
         # INCERTA LOS ESTADOS Y LA ACCION
         self.automata.append([self.ascii+str(self.cont),estadosS,self.ascii+str(self.cont)])
         self.cont = self.cont + 1 
-        self.automata.append([self.ascii+str(self.cont-1),self.variable+'|'+self.variable+'|R',self.ascii+str(self.cont)])
+        
+        
         
         # CONDICIONAL PARA CAMBIAR LAS VARIABLES CUANDO SE MUEVA A LA IZQUIERDA  
         if self.programa[self.cabezal]== 'X':
@@ -120,15 +121,24 @@ class MoverIzquierdaV:
         if c == 1:
             if self.programa[self.cabezal]== 'X':
                 self.programa[self.cabezal] = '0'
-                
+                self.automata.append([self.ascii+str(self.cont-1),self.variable+'|'+'0'+'|R',self.ascii+str(self.cont)])
+                self.automata.append([self.ascii+str(self.cont-1),self.programa[self.cabezal]+'|'+'0'+'|R',self.ascii+str(self.cont)])
             elif self.programa[self.cabezal]== 'Y':
                 self.programa[self.cabezal] = '1'
+                self.automata.append([self.ascii+str(self.cont-1),self.variable+'|'+'1'+'|R',self.ascii+str(self.cont)])
+                self.automata.append([self.ascii+str(self.cont-1),self.programa[self.cabezal]+'|'+'1'+'|R',self.ascii+str(self.cont)])
+        elif c == 0:
+            self.automata.append([self.ascii+str(self.cont-1),self.variable+'|'+self.variable+'|R',self.ascii+str(self.cont)])
+            self.cont = self.cont + 1
+            # CABEZAL
+            self.cabezal = self.cabezal + 1
+            self.automata.append([self.ascii+str(self.cont-1),self.programa[self.cabezal]+'|'+v+'|R',self.ascii+str(self.cont)])
+            
             
     # BUSCA LA VARIABLE A LA DERECHA           
     def moverDerecha(self,va):
         
-        # CABEZAL
-        self.cabezal = self.cabezal + 1
+
 
         #VARIABLES
         estados = ''
@@ -139,12 +149,12 @@ class MoverIzquierdaV:
     # CICLO PARA RECORRE LA CINTA EN BUSCA DE UNA Z HACIA LA DERECHA Y CREA EL AUTOMATA
         while self.programa[self.cabezal] != va:           
             
-        #---------------Movimiento en cinta metrica---------------------------
+            #---------------Movimiento en cinta metrica---------------------------
             auxiliar = self.programa[self.cabezal]
             self.programa[self.cabezal] = '▄'
             tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
             self.programa[self.cabezal] = auxiliar
-        #---------------Fin movimiento en cinta metrica-----------------------
+            #---------------Fin movimiento en cinta metrica-----------------------
 
         # CONDICIONALES PARA EVALUAR LOS NODOS Y MOVERSE A LA DERECHA EN BUSCA DE UNA Z
             if self.programa[self.cabezal] == 'A':
@@ -168,8 +178,8 @@ class MoverIzquierdaV:
 
     # INCERTA LOS ESTADOS Y LA ACCION
         self.automata.append([self.ascii+str(self.cont),estadosS,self.ascii+str(self.cont)])
-        self.cont = 1
-        self.automata.append([self.ascii+str(self.cont-1),self.variable+'|'+self.variable+'|R',self.ascii+str(self.cont)])
+        self.cont = self.cont + 1
+        
         
         #---------------Movimiento en cinta metrica---------------------------
         auxiliar = self.programa[self.cabezal]
@@ -180,6 +190,8 @@ class MoverIzquierdaV:
         
         # CAMBIO DE VARIABLE DE EN LA DERECHA
         if self.programa[self.cabezal]== 'X':
-            self.programa[self.cabezal] = '0'            
+            self.programa[self.cabezal] = '0'
+            self.automata.append([self.ascii+str(self.cont-1),va+'|'+'0'+'|R',self.ascii+str(self.cont)])            
         elif self.programa[self.cabezal]== 'Y':
+            self.automata.append([self.ascii+str(self.cont-1),va+'|'+'1'+'|R',self.ascii+str(self.cont)])
             self.programa[self.cabezal] = '1'
