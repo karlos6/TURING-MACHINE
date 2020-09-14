@@ -1,6 +1,6 @@
 from tkinter import *
 import tkinter as tk
-from Control.Controller import Controller
+from Control.Control import Control
 
 class Windows:     
 # Constructor de la ventana   
@@ -34,4 +34,4 @@ class Windows:
         
     def Accionar(self):
         programa = 'A00B00C00T00Z'+self.variable_1.get()
-        self.control = Controller(programa)
+        self.controlTotal = Control(programa)

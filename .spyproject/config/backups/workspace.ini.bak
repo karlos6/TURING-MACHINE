@@ -6,5 +6,5 @@ save_non_project_files = False
 
 [main]
 version = 0.2.0
-recent_files = ['View\\Windows.py', 'View\\Main.py', 'Control\\Controlador.py']
+recent_files = ['View\\Windows.py', 'View\\Main.py', 'Control\\Controlador.py', 'Control\\Controller.py', 'Automatas\\AsignarValor.py', 'Control\\Control.py', 'Automatas\\BuscarZeta.py', 'Automatas\\MoverIzquierdaV.py']
 
