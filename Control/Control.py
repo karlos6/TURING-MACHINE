@@ -2,7 +2,7 @@
 import tkinter.messagebox
 from Automatas.AsignarValor import AsignarValor
 from Automatas.BuscarZeta import BuscarZeta
-
+from Automatas.AsignarVariables import AsignarVariables
 
 
 class Control:
@@ -44,7 +44,7 @@ class Control:
         
     def switch(self, op):
             if op == '000': self.asignarValor(op)
-            elif op == '001': self.asignarVariables()
+            elif op == '001': self.asignarVariables(op)
             elif op == '010': self.desplazar()
             elif op == '011': self.sumar()
             elif op == '100': self.restar()
@@ -55,6 +55,9 @@ class Control:
         
     def asignarValor(self,op):
         self.automataAsignarValor = AsignarValor(self.programa,op,self.cabezal)
+    
+    def asignarVariables(self, op):
+        self.automataAsignarVariables = AsignarVariables(self.programa,op,self.cabezal)
         
         
         
