@@ -67,6 +67,9 @@ class Resta:
             self.programa = self.restaInv.programa
             self.cabezal = self.restaInv.cabezal            
             self.sumres = RestaSuma(self.programa,self.cabezal,self.v2,'T')
+            self.programa = self.sumres.programa
+            self.cabezal = self.sumres.cabezal
+            self.retornarPrograma()
             
             print(self.sumres.programa)
             
@@ -87,8 +90,37 @@ class Resta:
             self.programa = self.restaInv.programa
             self.cabezal = self.restaInv.cabezal
             self.sumres = RestaSuma(self.programa,self.cabezal,self.v2,'T')
+            self.programa = self.sumres.programa
+            self.cabezal = self.sumres.cabezal
+            self.retornarPrograma()
             
             print(self.sumres.programa)
+            
+            
+    def retornarPrograma(self):
+        while self.programa[self.cabezal] != self.retorno:
+            
+            self.cabezal = self.cabezal + 1            
+            #---------------Movimiento en cinta metrica---------------------------
+            auxiliar = self.programa[self.cabezal]
+            self.programa[self.cabezal] = '▄'
+            tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
+            self.programa[self.cabezal] = auxiliar
+            #---------------Fin movimiento en cinta metrica-----------------------
+            
+        if self.programa[self.cabezal]== 'X':
+            #---------------Movimiento en cinta metrica---------------------------
+            self.programa[self.cabezal] = '▄'
+            tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
+            self.programa[self.cabezal] = '0'
+            #---------------Fin movimiento en cinta metrica-----------------------
+            
+        elif self.programa[self.cabezal]== 'Y':
+            #---------------Movimiento en cinta metrica---------------------------
+            self.programa[self.cabezal] = '▄'
+            tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
+            self.programa[self.cabezal] = '1'
+            #---------------Fin movimiento en cinta metrica-----------------------
             
     def variables(self, op):
             return{

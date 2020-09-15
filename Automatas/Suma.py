@@ -63,6 +63,9 @@ class Suma:
             self.programa = self.sumIgual.programa
             self.cabezal = self.sumIgual.cabezal
             self.sumvar = SumarVar(self.programa,self.cabezal,self.v2,'T')
+            self.programa = self.sumvar.programa
+            self.cabezal = self.sumvar.cabezal
+            self.retornarPrograma()
             
             print('oooooooooooooooooooooooooooooo')
             print(self.sumvar.programa)
@@ -82,11 +85,39 @@ class Suma:
             self.programa = self.sumIgual.programa
             self.cabezal = self.sumIgual.cabezal
             self.sumvar = SumarVar(self.programa,self.cabezal,self.v2,'T')
+            self.programa = self.sumvar.programa
+            self.cabezal = self.sumvar.cabezal
+            self.retornarPrograma()
             
             
             print('oooooooooooooooooooooooooooooo')           
             print(self.sumvar.programa)
             print('oooooooooooooooooooooooooooooo')
+            
+    def retornarPrograma(self):
+        while self.programa[self.cabezal] != self.retorno:
+            
+            self.cabezal = self.cabezal + 1            
+            #---------------Movimiento en cinta metrica---------------------------
+            auxiliar = self.programa[self.cabezal]
+            self.programa[self.cabezal] = '▄'
+            tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
+            self.programa[self.cabezal] = auxiliar
+            #---------------Fin movimiento en cinta metrica-----------------------
+            
+        if self.programa[self.cabezal]== 'X':
+            #---------------Movimiento en cinta metrica---------------------------
+            self.programa[self.cabezal] = '▄'
+            tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
+            self.programa[self.cabezal] = '0'
+            #---------------Fin movimiento en cinta metrica-----------------------
+            
+        elif self.programa[self.cabezal]== 'Y':
+            #---------------Movimiento en cinta metrica---------------------------
+            self.programa[self.cabezal] = '▄'
+            tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
+            self.programa[self.cabezal] = '1'
+            #---------------Fin movimiento en cinta metrica-----------------------       
 
     def variables(self, op):
             return{

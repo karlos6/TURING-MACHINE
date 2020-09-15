@@ -14,7 +14,7 @@ class MoverVariables:
         self.cont = 0
         self.digito = ''
         self.valor = ''
-        self.ascii = chr(70)
+        self.ascii = chr(78)
         self.automata = []
         self.cabezal = cabezal
         self.Activador()
@@ -154,18 +154,24 @@ class MoverVariables:
         self.programa[self.cabezal] = auxiliar
         #---------------Fin movimiento en cinta metrica-----------------------
         
-        # INCERTA LOS ESTADOS Y LA ACCION
         self.automata.append([self.ascii+str(self.cont),estadosS,self.ascii+str(self.cont)])
-        self.cont = self.cont + 1 
-        self.automata.append([self.ascii+str(self.cont-1),self.variable1+'|'+self.variable1+'|R',self.ascii+str(self.cont)])
-        
-
         
         if self.programa[self.cabezal] == 'Y' or self.programa[self.cabezal] == 'X':
             if self.programa[self.cabezal]== 'X':
-                self.programa[self.cabezal] = '0'            
+                self.programa[self.cabezal] = '0'
+                self.cont = self.cont + 1 
+                self.automata.append([self.ascii+str(self.cont-1),self.v1+'|'+"0"+'|R',self.ascii+str(self.cont)])
             elif self.programa[self.cabezal]== 'Y':
                 self.programa[self.cabezal] = '1'
+                self.cont = self.cont + 1 
+                self.automata.append([self.ascii+str(self.cont-1),self.v1+'|'+"1"+'|R',self.ascii+str(self.cont)])
+        else:
+            # INCERTA LOS ESTADOS Y LA ACCION
+            self.cont = self.cont + 1 
+            self.automata.append([self.ascii+str(self.cont-1),self.programa[self.cabezal]+'|'+self.programa[self.cabezal]+'|R',self.ascii+str(self.cont)])
+        
+
+    
 
         
         self.cabezal = self.cabezal + 1
@@ -179,6 +185,9 @@ class MoverVariables:
                 tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
                 self.programa[self.cabezal] = 'X'
                 #---------------Fin movimiento en cinta metrica-------------------
+                self.cont = self.cont + 1 
+                self.automata.append([self.ascii+str(self.cont-1),"0"+'|'+self.programa[self.cabezal]+'|R',self.ascii+str(self.cont)])
+                
                 self.digito = 'X'
                 self.v1 = self.digito
                 #self.digito  =''
@@ -188,6 +197,9 @@ class MoverVariables:
                 tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
                 self.programa[self.cabezal] = 'Y'
                 #---------------Fin movimiento en cinta metrica------------------- 
+                self.cont = self.cont + 1 
+                self.automata.append([self.ascii+str(self.cont-1),"1"+'|'+self.programa[self.cabezal]+'|R',self.ascii+str(self.cont)])
+                
                 self.digito = 'Y'
                 self.v1 = self.digito
                 #self.digito = ''
@@ -198,6 +210,8 @@ class MoverVariables:
                 tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
                 self.programa[self.cabezal] = self.digito
                 #---------------Fin movimiento en cinta metrica-------------------
+                self.cont = self.cont + 1 
+                self.automata.append([self.ascii+str(self.cont-1),"0"+'|'+self.programa[self.cabezal]+'|R',self.ascii+str(self.cont)])
                 self.v2 = self.digito
                 #self.digito = ''
             elif self.programa[self.cabezal] == '1':
@@ -205,7 +219,9 @@ class MoverVariables:
                 self.programa[self.cabezal] = '▄'
                 tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
                 self.programa[self.cabezal] = self.digito
-                #---------------Fin movimiento en cinta metrica------------------- 
+                #---------------Fin movimiento en cinta metrica-------------------
+                self.cont = self.cont + 1 
+                self.automata.append([self.ascii+str(self.cont-1),"1"+'|'+self.programa[self.cabezal]+'|R',self.ascii+str(self.cont)])
                 self.v2 = self.digito
                 #self.digito  = ''
         ##print("izq ",self.programa[self.cabezal], "dig ",self.digito)
@@ -260,8 +276,6 @@ class MoverVariables:
             
     # INCERTA LOS ESTADOS Y LA ACCION
         self.automata.append([self.ascii+str(self.cont),estadosS,self.ascii+str(self.cont)])
-        self.cont = 1
-        self.automata.append([self.ascii+str(self.cont-1),self.v2+'|'+self.v2+'|R',self.ascii+str(self.cont)])
         
         #---------------Movimiento en cinta metrica---------------------------
         auxiliar = self.programa[self.cabezal]
@@ -273,7 +287,9 @@ class MoverVariables:
         #print("der ",self.programa[self.cabezal], "dig ",self.digito)
         if self.programa[self.cabezal] == 'Y' or self.programa[self.cabezal] == 'X':
             if self.programa[self.cabezal]== 'X':
-                self.programa[self.cabezal] = '0'   
+                self.programa[self.cabezal] = '0'
+                self.cont = self.cont + 1 
+                self.automata.append([self.ascii+str(self.cont-1),self.v2+'|'+"0"+'|R',self.ascii+str(self.cont)])
                 if self.variable1 == 'C' and self.variable2 == 'A':
                     self.digito = ''
                 elif self.variable1 == 'C' and self.variable2 == 'B':
@@ -282,12 +298,17 @@ class MoverVariables:
                     self.digito = ''
             elif self.programa[self.cabezal]== 'Y':
                 self.programa[self.cabezal] = '1'
+                self.cont = self.cont + 1 
+                self.automata.append([self.ascii+str(self.cont-1),self.v2+'|'+"1"+'|R',self.ascii+str(self.cont)])
                 if self.variable1 == 'C' and self.variable2 == 'A':
                     self.digito = ''
                 elif self.variable1 == 'C' and self.variable2 == 'B':
                     self.digito = ''
                 elif self.variable1 == 'B' and self.variable2 == 'A':
                     self.digito = ''
+        else: 
+             self.cont = self.cont + 1 
+             self.automata.append([self.ascii+str(self.cont-1),self.v2+'|'+self.v2+'|R',self.ascii+str(self.cont)])
         
         self.cabezal = self.cabezal+1  
         
@@ -299,6 +320,8 @@ class MoverVariables:
                 tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
                 self.programa[self.cabezal] = 'X'
                 #---------------Fin movimiento en cinta metrica-------------------
+                self.cont = self.cont + 1 
+                self.automata.append([self.ascii+str(self.cont-1),"0"+'|'+self.v2+'|L',self.ascii+str(self.cont)])
                 self.digito = 'X'
                 self.v1 = self.digito
             elif self.programa[self.cabezal] == '1':
@@ -307,6 +330,8 @@ class MoverVariables:
                 tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
                 self.programa[self.cabezal] = 'Y'
                 #---------------Fin movimiento en cinta metrica------------------- 
+                self.cont = self.cont + 1 
+                self.automata.append([self.ascii+str(self.cont-1),"1"+'|'+self.v2+'|L',self.ascii+str(self.cont)])
                 self.digito = 'Y'
                 self.v1 = self.digito
         elif self.digito != '':
@@ -316,6 +341,8 @@ class MoverVariables:
                 tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
                 self.programa[self.cabezal] = self.digito
                 #---------------Fin movimiento en cinta metrica------------------- 
+                self.cont = self.cont + 1 
+                self.automata.append([self.ascii+str(self.cont-1),"0"+'|'+self.digito+'|L',self.ascii+str(self.cont)])
                 self.v2 = self.digito
                 self.digito = ''
             elif self.programa[self.cabezal] == '1':
@@ -324,6 +351,8 @@ class MoverVariables:
                 tkinter.messagebox.showinfo("PASO A PASO:", str(self.programa))
                 self.programa[self.cabezal] = self.digito
                 #---------------Fin movimiento en cinta metrica------------------- 
+                self.cont = self.cont + 1 
+                self.automata.append([self.ascii+str(self.cont-1),"1"+'|'+self.digito+'|L',self.ascii+str(self.cont)])
                 self.v2 = self.digito
                 self.digito = ''
         
@@ -331,7 +360,6 @@ class MoverVariables:
 
     def cerrar (self,valor):
         # CABEZAL
-        self.cabezal = self.cabezal + 1
         
         #VARIABLES
         estados = ''
@@ -363,7 +391,9 @@ class MoverVariables:
             elif self.programa[self.cabezal] == '0':
                 estados = self.programa[self.cabezal]+','+self.programa[self.cabezal]+',R|'                 
             elif self.programa[self.cabezal] == '1':
-                estados = self.programa[self.cabezal]+','+self.programa[self.cabezal]+',R|' 
+                estados = self.programa[self.cabezal]+','+self.programa[self.cabezal]+',R|'
+            elif self.programa[self.cabezal] == 'Z':
+                estados = self.programa[self.cabezal]+','+self.programa[self.cabezal]+',R|'
         
         # CONDICION PARA CREAR EL AUTOMARA 
             if estados not in estadosT:
@@ -374,8 +404,8 @@ class MoverVariables:
             
     # INCERTA LOS ESTADOS Y LA ACCION
         self.automata.append([self.ascii+str(self.cont),estadosS,self.ascii+str(self.cont)])
-        self.cont = 1
-        self.automata.append([self.ascii+str(self.cont-1),self.v2+'|'+self.v2+'|R',self.ascii+str(self.cont)])
+        #self.cont = self.cont +1
+        #self.automata.append([self.ascii+str(self.cont-1),self.v2+'|'+self.v2+'|R',self.ascii+str(self.cont)])
         
         #---------------Movimiento en cinta metrica---------------------------
         auxiliar = self.programa[self.cabezal]

@@ -2,6 +2,8 @@
 import tkinter.messagebox
 from Automatas.MoverIzquierdaV import MoverIzquierdaV
 
+
+
 class AsignarValor:
     
     # INIT DEL OBJETO
@@ -49,7 +51,8 @@ class AsignarValor:
         self.llenadoVariable(codigoVar)        
         self.moverIzquierda = MoverIzquierdaV(self.programa,self.cabezal,variable)        
         self.enlazarAutomatas()
-        print(self.automata)
+        #print(self.automata)
+        
         
     def enlazarAutomatas(self):
         aux1 = self.automata[len(self.automata)-1]
