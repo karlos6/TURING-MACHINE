@@ -55,8 +55,14 @@ class AsignarVariables:
         aux1 = self.automata[len(self.automata)-1]
         aux1 = aux1[len(aux1)-1]
         aux1 = aux1[len(aux1)-1]
-        #self.moverVariables.automata[0][0] = aux1
-        self.automata.append(self.MoverVariables.automata)
+        self.moverVariables.automata[0][0] = aux1
+        
+        for i in self.MoverVariables.automata:
+            self.automata.append(i)
+            
+        
+        
+        
     
     def llenadoVariable(self,cod):
         listaV = []

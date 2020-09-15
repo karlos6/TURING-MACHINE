@@ -27,10 +27,10 @@ class Control:
         self.cabezal = self.automataBuscarZ.cabezal
         self.automata.append(self.automataBuscarZ.automata)
         self.codigosInstruccion()
-        print('--------------------------------------------------------------')
-        print('Buscar Zeta')
-        print(self.automata)
-        print('--------------------------------------------------------------')
+        #print('--------------------------------------------------------------')
+        #print('Buscar Zeta')
+        #print(self.automata)
+        #print('--------------------------------------------------------------')
 #-------SACA LOS CODIGOS PARA EJECUTAR LA ACCION DEL PROGRAMA-----------------
     def codigosInstruccion(self):
         codigo = ''
@@ -67,6 +67,8 @@ class Control:
         self.programa = self.automataAsignarValor.programa
         self.cabezal = self.automataAsignarValor.cabezal+2
         self.enlazarAutomatas(self.automataAsignarValor.automata)
+
+        
         self.codigosInstruccion()        
         
     def desplazar(self, op):
@@ -102,7 +104,12 @@ class Control:
         aux1 = aux1[len(aux1)-1]
         aux1 = aux1[len(aux1)-1]
         automa[0][0][0] = aux1
-        self.automata.append(automa)
+        
+        for i in automa:
+            self.automata.append(i)       
+        print('Automata de asignar valor')
+        print(self.automata)
+        
         
         
         

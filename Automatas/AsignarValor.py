@@ -25,9 +25,6 @@ class AsignarValor:
             self.cont = self.cont + 1
             listaP.append([self.ascii+str(self.cont-1),i+','+i+',R',self.ascii+str(self.cont)])
         self.automata.append(listaP)
-        
-            
-
 
     def sacarVariable(self):
         codigoVar = ''
@@ -49,24 +46,20 @@ class AsignarValor:
         self.llenadoVariable(codigoVar)        
         self.moverIzquierda = MoverIzquierdaV(self.programa,self.cabezal,variable)        
         self.enlazarAutomatas()
-        print(self.automata)
         
     def enlazarAutomatas(self):
         aux1 = self.automata[len(self.automata)-1]
         aux1 = aux1[len(aux1)-1]
         aux1 = aux1[len(aux1)-1]
         self.moverIzquierda.automata[0][0] = aux1
-        self.automata.append(self.moverIzquierda.automata)
-        
-        
+        self.automata.append(self.moverIzquierda.automata)        
         
     def llenadoVariable(self,cod):
         listaV = []
         for i in cod:
             self.cont = self.cont + 1
             listaV.append([self.ascii+str(self.cont-1),i+','+i+',R',self.ascii+str(self.cont)])
-        self.automata.append(listaV)  
-        
+        self.automata.append(listaV)        
         
     def variables(self, op):
             return{
