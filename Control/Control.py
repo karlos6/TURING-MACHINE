@@ -3,6 +3,9 @@ import tkinter.messagebox
 from Automatas.AsignarValor import AsignarValor
 from Automatas.BuscarZeta import BuscarZeta
 from Automatas.DesplazarIzqDra import DesplazarIzqDra
+from Automatas.AsignarVariable import AsignarVariable
+from Automatas.Suma import Suma
+from Automatas.Resta import Resta
 
 
 
@@ -41,15 +44,16 @@ class Control:
             #---------------Fin movimiento en cinta metrica--------------------            
             codigo = codigo + self.programa[self.cabezal]  
             contador = contador + 1
+            print(codigo)
         self.switch(codigo)    
 
         
     def switch(self, op):
             if op == '000': self.asignarValor(op)
-            elif op == '001': self.asignarVariables()
+            elif op == '001': self.asignarVariables(op)
             elif op == '010': self.desplazar(op)
-            elif op == '011': self.sumar()
-            elif op == '100': self.restar()
+            elif op == '011': self.sumar(op)
+            elif op == '100': self.restar(op)
             elif op == '101': self.inicioRepetir()
             elif op == '110': self.finRepetir()
             elif op == '111': self.finPrograma()
@@ -57,10 +61,25 @@ class Control:
             
         
     def asignarValor(self,op):
-        self.automataAsignarValor = AsignarValor(self.programa,op,self.cabezal)
+        self.automataAsignarValor = AsignarValor(self.programa,op,self.cabezal)        
+
+        self.programa = self.automataAsignarValor.programa
+        self.cabezal = self.automataAsignarValor.cabezal+2
+        self.codigosInstruccion()
+        
         
     def desplazar(self, op):
         self.automataDesplazar = DesplazarIzqDra(self.programa,op,self.cabezal)
+        
+    def asignarVariables(self, op):
+        self.automataAsignarVariable = AsignarVariable(self.programa,op,self.cabezal)
+        
+    def sumar(self, op):
+        self.automataSuma = Suma(self.programa,op,self.cabezal)
+        
+    def restar(self, op):
+        self.automataResta = Resta(self.programa,op,self.cabezal)
+        
         
         
         
