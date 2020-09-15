@@ -68,6 +68,8 @@ class Control:
         self.programa = self.automataAsignarValor.programa
         self.cabezal = self.automataAsignarValor.cabezal+2
         self.enlazarAutomatas(self.automataAsignarValor.automata)
+
+        
         self.codigosInstruccion()        
         
     def desplazar(self, op):
@@ -103,10 +105,18 @@ class Control:
         aux1 = aux1[len(aux1)-1]
         aux1 = aux1[len(aux1)-1]
         automa[0][0][0] = aux1
+<<<<<<< HEAD
         self.automata.append(automa)
         print(self.automata)
         self.grafico = Graph('AUTOMATA')
         self.grafico.Conexiones(self.automata)
+=======
+        
+        for i in automa:
+            self.automata.append(i)       
+        print('Automata de asignar valor')
+        print(self.automata)
+>>>>>>> c1c9b9beb0f0253969ab9dea1d70e22634294a06
         
         
         
