@@ -49,11 +49,8 @@ class Control:
                 codigo = codigo + self.programa[self.cabezal]  
                 contador = contador + 1
                 print(codigo)
-            self.switch(codigo)   
+            self.switch(codigo)
             
-            
-
-        
     def switch(self, op):
             if op == '000': self.asignarValor(op)
             elif op == '001': self.asignarVariables(op)
@@ -63,15 +60,14 @@ class Control:
             elif op == '101': self.inicioRepetir()
             elif op == '110': self.finRepetir()
             elif op == '111': self.finPrograma()
-            else: print('esta jodido')
-            
+            else: print('esta jodido')            
         
     def asignarValor(self,op):
         self.automataAsignarValor = AsignarValor(self.programa,op,self.cabezal)
         self.programa = self.automataAsignarValor.programa
         self.cabezal = self.automataAsignarValor.cabezal+2
-        self.codigosInstruccion()
-        
+        self.enlazarAutomatas(self.automataAsignarValor.automata)
+        self.codigosInstruccion()        
         
     def desplazar(self, op):
         self.automataDesplazar = DesplazarIzqDra(self.programa,op,self.cabezal)  
@@ -89,8 +85,7 @@ class Control:
         self.automataSuma = Suma(self.programa,op,self.cabezal)
         self.programa = self.automataSuma.programa
         self.cabezal = self.automataSuma.cabezal
-        self.codigosInstruccion()
-        
+        self.codigosInstruccion()        
         
     def restar(self, op):
         self.automataResta = Resta(self.programa,op,self.cabezal)
@@ -101,6 +96,13 @@ class Control:
     def finPrograma(self):
         self.bandera = False
         tkinter.messagebox.showinfo("FIN DEL PROGRAMA:", str(self.programa))
+        
+    def enlazarAutomatas(self,automa):
+        aux1 = self.automata[len(self.automata)-1]
+        aux1 = aux1[len(aux1)-1]
+        aux1 = aux1[len(aux1)-1]
+        automa[0][0][0] = aux1
+        self.automata.append(automa)
         
         
         
