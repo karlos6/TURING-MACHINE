@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import tkinter.messagebox
 from Automatas.MoverVariables import MoverVariables
+from Grafica.Graph import Graph
+
 
 class AsignarVariables:
     
@@ -43,8 +45,11 @@ class AsignarVariables:
         variable2 = self.variables(codigoVar[2]+codigoVar[3])
         self.MoverVariables = MoverVariables(self.programa, self.cabezal, variable1,variable2)
         self.enlazarAutomatas()
+        self.automata
         
-        print(self.automata)
+        self.grafico = Graph('AUTOMATA')
+        self.grafico.Conexiones(self.automata)
+        #print(self.automata)
         #print(variable1)
         #print(variable2)
         #print(codigoVar)
