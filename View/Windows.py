@@ -33,9 +33,5 @@ class Windows:
                         command= self.Accionar).place(x=180,y=150)
         
     def Accionar(self):
-<<<<<<< HEAD
-        programa = 'A00B10C11T00Z'+self.variable_1.get()
-=======
-        programa = 'A11B00C00T00Z'+self.variable_1.get()
->>>>>>> deb11b676f002ecc34e02b54c447125442528c2b
+        programa = 'A00B01C11T00Z'+self.variable_1.get()
         self.controlTotal = Control(programa)

@@ -7,7 +7,7 @@ class AsignarVariables:
         self.programa = list(cadena)
         self.automata = []
         self.cont = 0
-        self.ascii = chr(65)
+        self.ascii = chr(77)
         self.cabezal = cabezal
         self.activador(ejecucion)
     
@@ -37,16 +37,32 @@ class AsignarVariables:
         #---------------Fin movimiento en cinta metrica-----------------------
             codigoVar = codigoVar + self.programa[self.cabezal]
             esta = esta + 1
-            
-        
+                  
         variable1 = self.variables(codigoVar[0]+codigoVar[1])
         variable2 = self.variables(codigoVar[2]+codigoVar[3])
         self.MoverVariables = MoverVariables(self.programa, self.cabezal, variable1,variable2)
+        self.enlazarAutomatas()
         
-        #print(self.automata)
+        print(self.automata)
         #print(variable1)
         #print(variable2)
         #print(codigoVar)
+    
+    
+    
+    def enlazarAutomatas(self):
+        aux1 = self.automata[len(self.automata)-1]
+        aux1 = aux1[len(aux1)-1]
+        aux1 = aux1[len(aux1)-1]
+        #self.moverVariables.automata[0][0] = aux1
+        self.automata.append(self.MoverVariables.automata)
+    
+    def llenadoVariable(self,cod):
+        listaV = []
+        for i in cod:
+            self.cont = self.cont + 1
+            listaV.append([self.ascii+str(self.cont-1),i+','+i+',R',self.ascii+str(self.cont)])
+        self.automata.append(listaV)  
         
     def variables(self, op):
             return{
@@ -56,28 +72,13 @@ class AsignarVariables:
                 '11': self.V4T(),
             }.get(op)  
         
-    def V1A(self,op):
-        listaV = []
-        for i in op:
-            self.cont = self.cont + 1
-            listaV.append([self.ascii+str(self.cont-1),i+','+i+',R',self.ascii+str(self.cont)])
-        self.automata.append(listaV)      
+    def V1A(self,op):   
         return 'A'
     
-    def V2B(self,op):
-        listaV = []
-        for i in op:
-            self.cont = self.cont + 1
-            listaV.append([self.ascii+str(self.cont-1),i+','+i+',R',self.ascii+str(self.cont)])
-        self.automata.append(listaV)   
+    def V2B(self,op):  
         return 'B'
     
     def V3C(self,op):
-        listaV = []
-        for i in op:
-            self.cont = self.cont + 1
-            listaV.append([self.ascii+str(self.cont-1),i+','+i+',R',self.ascii+str(self.cont)])
-        self.automata.append(listaV) 
         return 'C'
     
     def V4T(self):

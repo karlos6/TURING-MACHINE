@@ -25,9 +25,7 @@ class AsignarValor:
             self.cont = self.cont + 1
             listaP.append([self.ascii+str(self.cont-1),i+','+i+',R',self.ascii+str(self.cont)])
         self.automata.append(listaP)
-        
-            
-
+                
 
     def sacarVariable(self):
         codigoVar = ''
@@ -58,8 +56,7 @@ class AsignarValor:
         self.moverIzquierda.automata[0][0] = aux1
         self.automata.append(self.moverIzquierda.automata)
         
-        
-        
+          
     def llenadoVariable(self,cod):
         listaV = []
         for i in cod:

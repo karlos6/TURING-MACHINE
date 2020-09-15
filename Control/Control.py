@@ -2,12 +2,9 @@
 import tkinter.messagebox
 from Automatas.AsignarValor import AsignarValor
 from Automatas.BuscarZeta import BuscarZeta
-<<<<<<< HEAD
 from Automatas.AsignarVariables import AsignarVariables
-=======
 from Automatas.DesplazarIzqDra import DesplazarIzqDra
 
->>>>>>> deb11b676f002ecc34e02b54c447125442528c2b
 
 
 class Control:
@@ -28,7 +25,7 @@ class Control:
         self.codigosInstruccion()
         print('--------------------------------------------------------------')
         print('Buscar Zeta')
-        print(self.automataBuscarZ.automata)
+        #print(self.automataBuscarZ.automata)
         print('--------------------------------------------------------------')
 #-------SACA LOS CODIGOS PARA EJECUTAR LA ACCION DEL PROGRAMA-----------------
     def codigosInstruccion(self):
@@ -50,13 +47,8 @@ class Control:
         
     def switch(self, op):
             if op == '000': self.asignarValor(op)
-<<<<<<< HEAD
             elif op == '001': self.asignarVariables(op)
-            elif op == '010': self.desplazar()
-=======
-            elif op == '001': self.asignarVariables()
             elif op == '010': self.desplazar(op)
->>>>>>> deb11b676f002ecc34e02b54c447125442528c2b
             elif op == '011': self.sumar()
             elif op == '100': self.restar()
             elif op == '101': self.inicioRepetir()
@@ -70,6 +62,7 @@ class Control:
     
     def asignarVariables(self, op):
         self.automataAsignarVariables = AsignarVariables(self.programa,op,self.cabezal)
+        print(self.automataAsignarVariables.cabezal)
         
     def desplazar(self, op):
         self.automataDesplazar = DesplazarIzqDra(self.programa,op,self.cabezal)
