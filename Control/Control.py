@@ -3,7 +3,7 @@ import tkinter.messagebox
 from Automatas.AsignarValor import AsignarValor
 from Automatas.BuscarZeta import BuscarZeta
 from Automatas.DesplazarIzqDra import DesplazarIzqDra
-from Automatas.AsignarVariable import AsignarVariable
+from Automatas.AsignarVariables import AsignarVariables
 from Automatas.Suma import Suma
 from Automatas.Resta import Resta
 
@@ -61,8 +61,7 @@ class Control:
             
         
     def asignarValor(self,op):
-        self.automataAsignarValor = AsignarValor(self.programa,op,self.cabezal)        
-
+        self.automataAsignarValor = AsignarValor(self.programa,op,self.cabezal)
         self.programa = self.automataAsignarValor.programa
         self.cabezal = self.automataAsignarValor.cabezal+2
         self.codigosInstruccion()
@@ -72,7 +71,7 @@ class Control:
         self.automataDesplazar = DesplazarIzqDra(self.programa,op,self.cabezal)
         
     def asignarVariables(self, op):
-        self.automataAsignarVariable = AsignarVariable(self.programa,op,self.cabezal)
+        self.automataAsignarVariable = AsignarVariables(self.programa,op,self.cabezal)
         
     def sumar(self, op):
         self.automataSuma = Suma(self.programa,op,self.cabezal)
